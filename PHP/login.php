@@ -1,6 +1,8 @@
 <?php
 // Initialize the session
 session_start();
+include 'ChromePhp.php';
+ChromePhp::log('Login page');
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -64,6 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
+                            console.log("sending user to welcome");
                             header("location: welcome.php");
                         } else{
                             // Display an error message if password is not valid
