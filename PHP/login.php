@@ -60,6 +60,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Password is correct, so start a new session
                             session_start();
                             
+                            $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+                            if ($link->connect_error) {
+                                die("Connection failed: " . $link->connect_error);
+                            }
+                            ChromePhp::log('Intializing Database');
+                        
+                        $sql="DROP TABLE IF EXISTS `teaches`;";
+                        $sql.="DROP TABLE IF EXISTS `takes`;";
+                        $sql.="DROP TABLE IF EXISTS `advisor`;";
+                        $sql.="DROP TABLE IF EXISTS `student`;";
+                        $sql.="DROP TABLE IF EXISTS `section`;";
+                        $sql.="DROP TABLE IF EXISTS `prereq`;";
+                        $sql.="DROP TABLE IF EXISTS `instructor`;";
+                        $sql.="DROP TABLE IF EXISTS `course`;";
+                        $sql.="DROP TABLE IF EXISTS `time_slot`;";
+                        $sql.="DROP TABLE IF EXISTS `department`;";
+                        $sql.="DROP TABLE IF EXISTS `classroom`;";
+                        
+                        if(mysqli_multi_query($link,$sql)){
+                            ChromePhp::log('all tables dropped');
+                        }else{
+                            echo(mysqli_error($link));
+                        }
+                        $link->close();
+
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["user_id"] = $user_id;
