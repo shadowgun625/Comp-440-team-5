@@ -55,6 +55,23 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
+$sql = "INSERT INTO `classroom` VALUES 
+('JD', '1234', 2),
+('JD', '1235', 2),
+('JD', '1236', 2),
+('JD', '1237', 2),
+('JD', '1238', 2),
+('JD', '1239', 2),
+('JD', '1241', 2),
+('JD', '1242', 2),
+('JD', '1243', 2),
+('JD', '1244', 2);";
+if ($link->query($sql) === TRUE) {
+    echo "New record in clasroom created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
 $sql = "CREATE TABLE `department` (
     `dept_name` varchar(20) NOT NULL,
     `building` varchar(15) DEFAULT NULL,
@@ -67,6 +84,24 @@ if(mysqli_query($link,$sql)){
 }else{
     echo(mysqli_error($link));
 }
+
+$sql = "INSERT INTO `department` VALUES 
+('Computer Science', 'JD', 278000),
+('Economics', 'BB', 40000),
+('Mathematics', 'LO',70000),
+('Kinesiology', 'RE', 25000),
+('History', 'SC', 276000),
+('Anthropology', 'MS', 256000),
+('Nursing', 'JD', 278000),
+('Music', 'CS', 25600),
+('Biology', 'CR', 45000),
+('Manegment', 'JR', 455000);";
+if ($link->query($sql) === TRUE) {
+    echo "New record in departament created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
 
 $sql = "CREATE TABLE `time_slot` (
     `time_slot_id` varchar(4) NOT NULL,
@@ -86,6 +121,23 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
+$sql = "INSERT INTO `time_slot` VALUES 
+('1231', 'M', 9, 30, 10, 45),
+('1232', 'M', 11, 0, 12, 15),
+('1233', 'M', 1, 30, 2, 45),
+('1234', 'M', 3, 0, 4, 15),
+('1235', 'M', 9, 30, 10, 45),
+('1236', 'M', 9, 30, 10, 45),
+('1237', 'M', 4, 30, 5, 45),
+('1238', 'M', 11, 0, 12, 15),
+('1239', 'M', 9, 30, 10, 45),
+('1230', 'M', 9, 30, 10, 45);";
+if ($link->query($sql) === TRUE) {
+    echo "New record in time_slot created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
 
 $sql = "CREATE TABLE `course` (
 `course_id` varchar(8) NOT NULL,
@@ -102,6 +154,25 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
+$sql = "INSERT INTO `course` VALUES 
+('1231', 'Course1', 'Computer Science', 3),
+('1234', 'Course1', 'Computer Science', 3),
+('1235', 'Course1', 'Computer Science', 3),
+('1236', 'Course1', 'Computer Science', 4),
+('1237', 'Course1', 'Computer Science', 3),
+('1238', 'Course1', 'Computer Science', 3),
+('1239', 'Course1', 'Computer Science', 3),
+('1230', 'Course1', 'Computer Science', 4),
+('1232', 'Course1', 'Computer Science', 3),
+('1233', 'Course1', 'Computer Science', 3);";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in course created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
+
 $sql = "CREATE TABLE `instructor` (
   `ID` varchar(5) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -117,6 +188,25 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
+$sql = "INSERT INTO `instructor` VALUES 
+('1231', 'Anna', 'Computer Science', 30000),
+('1234', 'Mike', 'Computer Science', 30000),
+('1235', 'Mike', 'Computer Science', 345000),
+('1236', 'Mike', 'Computer Science', 435000),
+('1237', 'Mike', 'Computer Science', 30000),
+('1238', 'Mike', 'Computer Science', 300000),
+('1239', 'Mike', 'Computer Science', 312000),
+('1230', 'Mike', 'Computer Science', 40000),
+('1232', 'Mike', 'Computer Science', 30000),
+('1233', 'Anna', 'Computer Science', 30000);";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in instructor created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
+
 $sql = "CREATE TABLE `prereq` (
   `course_id` varchar(8) NOT NULL,
   `prereq_id` varchar(8) NOT NULL,
@@ -128,6 +218,24 @@ if(mysqli_query($link,$sql)){
     ChromePhp::log('prereq created successfully');
 }else{
     echo(mysqli_error($link));
+}
+
+$sql = "INSERT INTO `prereq` VALUES 
+('1231', '1231'),
+('1234', '1232'),
+('1235', '1233'),
+('1236', '1234'),
+('1237', '1235'),
+('1238', '1236'),
+('1239', '1237'),
+('1230', '1238'),
+('1232', '1239'),
+('1233', '1230');";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in prereq created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
 }
 
 $sql = "CREATE TABLE `section` (
@@ -150,6 +258,24 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
+$sql = "INSERT INTO `section` VALUES 
+('1230', '5670', 'Fall' , '2020' , 'JD', '1234', '1231'),
+('1231', '5671', 'Fall' , '2020' , 'JD', '1235', '1231'),
+('1232', '5672', 'Fall' , '2020' , 'JD', '1236', '1231'),
+('1233', '5678', 'Fall' , '2020' , 'JD', '1237', '1231'),
+('1234', '5678', 'Fall' , '2020' , 'JD', '1238', '1231'),
+('1235', '5678', 'Fall' , '2020' , 'JD', '1239', '1231'),
+('1236', '5678', 'Fall' , '2020' , 'JD', '1241', '1231'),
+('1237', '5678', 'Fall' , '2020' , 'JD', '1242', '1231'),
+('1238', '5678', 'Fall' , '2020' , 'JD', '1243', '1231'),
+('1239', '5678', 'Fall' , '2020' , 'JD', '1244', '1231');";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in section created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
 
 $sql = "CREATE TABLE `student` (
   `ID` varchar(5) NOT NULL,
@@ -166,6 +292,25 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
+$sql = "INSERT INTO `student` VALUES 
+('1231', 'Anna', 'Computer Science', 12),
+('1234', 'Mike', 'Economics', 3),
+('1235', 'Mike', 'Anthropology', 3),
+('1236', 'Mike', 'Biology', 4),
+('1237', 'Mike', 'Nursing', 3),
+('1238', 'Mike', 'Manegment', 3),
+('1239', 'Mike', 'Computer Science', 3),
+('1230', 'Mike', 'Music', 4),
+('1232', 'Mike', 'History', 3),
+('1233', 'Anna', 'History', 3);";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in student created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
+
 $sql = "CREATE TABLE `advisor` (
     `s_ID` varchar(5) NOT NULL,
     `i_ID` varchar(5) DEFAULT NULL,
@@ -178,6 +323,25 @@ $sql = "CREATE TABLE `advisor` (
     }else{
         echo(mysqli_error($link));
     }
+
+$sql = "INSERT INTO `advisor` VALUES 
+('1231', '1231'),
+('1234', '1231'),
+('1235', '1231'),
+('1236', '1231'),
+('1237', '1231'),
+('1238', '1231'),
+('1239', '1231'),
+('1230', '1231'),
+('1232', '1231'),
+('1233', '1231');";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in advisor created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
 
 $sql = "CREATE TABLE `takes` (
   `ID` varchar(5) NOT NULL,
@@ -196,6 +360,25 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
+$sql = "INSERT INTO `takes` VALUES 
+('1230', '1230', '5670', 'Fall' , '2020' , 'A'),
+('1231', '1231', '5671', 'Fall' , '2020' , 'A'),
+('1232', '1232', '5672', 'Fall' , '2020' , 'A'),
+('1233', '1233', '5673', 'Fall' , '2020' , 'A'),
+('1234', '1234', '5674', 'Fall' , '2020' , 'A'),
+('1235', '1235', '5675', 'Fall' , '2020' , 'A'),
+('1236', '1236', '5676', 'Fall' , '2020' , 'A'),
+('1237', '1237', '5677', 'Fall' , '2020' , 'A'),
+('1238', '1238', '5678', 'Fall' , '2020' , 'A'),
+('1239', '1239', '5679', 'Fall' , '2020' , 'A');";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in takes created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
+
 $sql = "CREATE TABLE `teaches` (
   `ID` varchar(5) NOT NULL,
   `course_id` varchar(8) NOT NULL,
@@ -212,17 +395,25 @@ if(mysqli_query($link,$sql)){
     echo(mysqli_error($link));
 }
 
-$sql = "INSERT INTO `student` VALUES 
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234'),
-('john', 'pass1234');";
+$sql = "INSERT INTO `teaches` VALUES 
+('1230', '1230', '5670', 'Fall' , '2020'),
+('1231', '1231', '5671', 'Fall' , '2020'),
+('1232', '1232', '5672', 'Fall' , '2020'),
+('1233', '1233', '5673', 'Fall' , '2020'),
+('1234', '1234', '5674', 'Fall' , '2020'),
+('1235', '1235', '5675', 'Fall' , '2020'),
+('1236', '1236', '5676', 'Fall' , '2020'),
+('1237', '1237', '5677', 'Fall' , '2020'),
+('1238', '1238', '5678', 'Fall' , '2020'),
+('1239', '1239', '5679', 'Fall' , '2020');";
+
+if ($link->query($sql) === TRUE) {
+    echo "New record in teaches created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
+
 if(mysqli_query($link,$sql)){
     ChromePhp::log('Inserted 10 students successfully');
 }else{
@@ -247,7 +438,7 @@ $link->close();
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
         <h1>
         <form name="form" method="post">
-        <input type="submit" name="button1" value="Intialize Database!" />
+        <input type="submit" name="button1" class="btn btn-primary" value="Intialize Database!" />
         </h1>
     </div>
     <p>
