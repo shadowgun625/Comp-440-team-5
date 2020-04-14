@@ -1,6 +1,9 @@
+
 <?php
 // Initialize the session
 session_start();
+include 'ChromePhp.php';
+ChromePhp::log('Welcome Page granted');
  
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -9,7 +12,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d235fbd... added intial db to intialize database through sql file and change name of database to social project
 
 if(isset($_POST['button1'])){
     define('DB_SERVER', 'localhost');
@@ -262,6 +268,7 @@ $sql = "INSERT INTO `section` VALUES
 ('1230', '5670', 'Fall' , '2020' , 'JD', '1234', '1231'),
 ('1231', '5671', 'Fall' , '2020' , 'JD', '1235', '1231'),
 ('1232', '5672', 'Fall' , '2020' , 'JD', '1236', '1231'),
+<<<<<<< HEAD
 ('1233', '5678', 'Fall' , '2020' , 'JD', '1237', '1231'),
 ('1234', '5678', 'Fall' , '2020' , 'JD', '1238', '1231'),
 ('1235', '5678', 'Fall' , '2020' , 'JD', '1239', '1231'),
@@ -269,6 +276,15 @@ $sql = "INSERT INTO `section` VALUES
 ('1237', '5678', 'Fall' , '2020' , 'JD', '1242', '1231'),
 ('1238', '5678', 'Fall' , '2020' , 'JD', '1243', '1231'),
 ('1239', '5678', 'Fall' , '2020' , 'JD', '1244', '1231');";
+=======
+('1233', '5673', 'Fall' , '2020' , 'JD', '1237', '1231'),
+('1234', '5674', 'Fall' , '2020' , 'JD', '1238', '1231'),
+('1235', '5675', 'Fall' , '2020' , 'JD', '1239', '1231'),
+('1236', '5676', 'Fall' , '2020' , 'JD', '1241', '1231'),
+('1237', '5677', 'Fall' , '2020' , 'JD', '1242', '1231'),
+('1238', '5678', 'Fall' , '2020' , 'JD', '1243', '1231'),
+('1239', '5679', 'Fall' , '2020' , 'JD', '1244', '1231');";
+>>>>>>> parent of d235fbd... added intial db to intialize database through sql file and change name of database to social project
 
 if ($link->query($sql) === TRUE) {
     echo "New record in section created successfully";
@@ -375,6 +391,10 @@ $sql = "INSERT INTO `takes` VALUES
 if ($link->query($sql) === TRUE) {
     echo "New record in takes created successfully";
 } else {
+<<<<<<< HEAD
+=======
+    echo "takes";
+>>>>>>> parent of d235fbd... added intial db to intialize database through sql file and change name of database to social project
     echo "Error: " . $sql . "<br>" . $link->error;
 }
 
@@ -410,6 +430,7 @@ $sql = "INSERT INTO `teaches` VALUES
 if ($link->query($sql) === TRUE) {
     echo "New record in teaches created successfully";
 } else {
+<<<<<<< HEAD
     echo "Error: " . $sql . "<br>" . $link->error;
 }
 
@@ -424,6 +445,14 @@ $link->close();
 >>>>>>> parent of bdd068a... ready to turn in part1
 =======
 >>>>>>> parent of 6bf4771... create table statments for all tables and initialize db button works. drop tables work
+=======
+    echo "teaches";
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+
+$link->close();
+}
+>>>>>>> parent of d235fbd... added intial db to intialize database through sql file and change name of database to social project
 ?>
  
 <!DOCTYPE html>
@@ -439,12 +468,13 @@ $link->close();
 <body>
     <div class="page-header">
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+        <h1>
+        <form name="form" method="post">
+        <input type="submit" name="button1" class="btn btn-primary" value="Intialize Database!" />
+        </h1>
     </div>
     <p>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
-    </p>
-	<p>
-        <a href="initalDB.php" class="btn btn-danger">Initalize database</a>
     </p>
 </body>
 </html>
