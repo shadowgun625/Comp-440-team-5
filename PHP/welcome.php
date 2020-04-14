@@ -1,15 +1,13 @@
-
 <?php
 // Initialize the session
 session_start();
-include 'ChromePhp.php';
-ChromePhp::log('Welcome Page granted');
  
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -453,6 +451,8 @@ $link->close();
 $link->close();
 }
 >>>>>>> parent of d235fbd... added intial db to intialize database through sql file and change name of database to social project
+=======
+>>>>>>> 2efefcb60a0f4e29b3dc404e18f6452977650767
 ?>
  
 <!DOCTYPE html>
@@ -468,13 +468,12 @@ $link->close();
 <body>
     <div class="page-header">
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
-        <h1>
-        <form name="form" method="post">
-        <input type="submit" name="button1" class="btn btn-primary" value="Intialize Database!" />
-        </h1>
     </div>
     <p>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+    </p>
+	<p>
+        <a href="initalDB.php" class="btn btn-danger">Initalize database</a>
     </p>
 </body>
 </html>
