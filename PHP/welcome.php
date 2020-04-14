@@ -8,6 +8,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 if(isset($_POST['button1'])){
@@ -421,6 +422,8 @@ if(mysqli_query($link,$sql)){
 $link->close();
 }
 >>>>>>> parent of bdd068a... ready to turn in part1
+=======
+>>>>>>> parent of 6bf4771... create table statments for all tables and initialize db button works. drop tables work
 ?>
  
 <!DOCTYPE html>
