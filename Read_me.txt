@@ -1,13 +1,11 @@
-Youtube Presentation Video link https://www.youtube.com/watch?v=sGXrN80vZSE
-
 Website used for php code: https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php
 
 Team 3 
 
 Members:
-Astghik Hovhannisyan 	(contributed developing welcome page, sql commands, insert statements)
-Aram Balayan		(contributed developing welcome, sql commands, debugging)
-Wes Flamenco		(contributed developing login, welcome, sql commands, php code)
+Astghik Hovhannisyan
+Aram Balayan
+Wes Flamenco
 
 installation: 
 1. Install Xampp  found https://www.apachefriends.org/index.html
