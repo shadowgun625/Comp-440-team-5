@@ -1,5 +1,4 @@
 <?php
-
 // Name of the file
 $filename = 'university.sql';
 // MySQL host
@@ -7,9 +6,9 @@ $mysql_host = 'localhost';
 // MySQL username
 $mysql_username = 'root';
 // MySQL password
-$mysql_password = '';
+$mysql_password = 'mysql';
 // Database name
-$mysql_database = 'project';
+$mysql_database = 'social project';
 
 // Connect to MySQL server
 $con = @new mysqli($mysql_host,$mysql_username,$mysql_password,$mysql_database);
@@ -41,7 +40,7 @@ foreach ($lines as $line) {
     }
 }
 echo "Tables imported successfully";
-$con->close($con);
+$con->close();
 header("location: welcome.php");
 exit;
 ?>
