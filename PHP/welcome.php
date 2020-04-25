@@ -29,5 +29,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 	<p>
         <a href="initalDB.php" class="btn btn-danger">Initalize database</a>
     </p>
+	<p>
+        <a href="blog.php" class="btn btn-danger">Insert Blog</a>
+    </p>
 </body>
 </html>
