@@ -46,10 +46,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="text" name="description" class="form-control" value="<?php echo $description; ?>">
                 <span class="help-block"><?php echo $description_err; ?></span>
             </div>    
-			<div class="form-group <?php echo (!empty($Tag_err)) ? 'has-error' : ''; ?>">
+			<div class="form-group <?php echo (!empty($tag_err)) ? 'has-error' : ''; ?>">
                 <label>Tags</label>
-                <input type="text" name="Tag" class="form-control" value="<?php echo $Tag; ?>">
-                <span class="help-block"><?php echo $Tag_err; ?></span>
+                <input type="text" name="Tag" class="form-control" value="<?php echo $tag; ?>">
+                <span class="help-block"><?php echo $tag_err; ?></span>
             </div>  
 	<p>
         <a href="Welcome.php" class="btn btn-danger">submit</a>
