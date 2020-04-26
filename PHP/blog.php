@@ -12,24 +12,57 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 } 
  // Define variables and initialize with empty values
 $description = $tag = $subject = "";
+
+
 $description_err = $tag_err = $subject_err = "";
-$date = date('d-m-y h:i:s');
+
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($description_err) && empty($tag_err) && empty($subject_err)){
+        $pdate = date('Y-m-d');
+        $postuser=$_SESSION["username"];
+        $description = trim($_POST["description"]);
+        $tag = trim($_POST["tag"]);
+        $subject = trim($_POST["subject"]);
         // Prepare an insert statement
+        // print $description;
+        // print $pdate;
+        // print $postuser;
+        // print $subject;
         $sql = "INSERT INTO blogs (description, pdate, postuser, subject) VALUES (?, ?, ?, ?)";
-         
+        //$sql = "INSERT INTO blogs (description, pdate, postuser, subject) VALUES (?, ?, ?, ?);
+        //        INSERT INTO blogstags (blogid, tag) VALUES (LAST_INSERT_ID(),?);";
+
         if($stmt = mysqli_prepare($link, $sql)){    
             // Attempt to execute the prepared statement
-			mysqli_stmt_bind_param($stmt, "ssss", $param_description, $param_pdate, $param_postuser, $param_subject);
-			$param_description = $description;
+            $param_description = $description;
 			$param_pdate = $pdate;
-			$param_postuser = $postuser;
-			$param_subject = $subject;
+			$param_postuser = $_SESSION["username"];
+            $param_subject = $subject;
+            $param_tag=$tag;
+            mysqli_stmt_bind_param($stmt, "ssss", $param_description, $param_pdate, $param_postuser, $param_subject);
+
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
+                // $sql = "SELECT blogid FROM blogs WHERE username = '" . $_SESSION['username'] . "'";
+                // $result = mysql_query($sql);
+                // $result = mysqli_stmt_get_result($stmt);
+                // $lastID = mysql_insert_id($result);
+                // $sql = "INSERT INTO blogstags (blogid, tag) VALUES (?, ?)";
+                // if($stmt = mysqli_prepare($link, $sql)){
+                //     // $sql = "SELECT blogid FROM blogs WHERE username IS ?";
+                //     // mysqli_stmt_bind_param($stmt, "s", $postuser);
+                //     // if(mysqli_stmt_execute($stmt)){
+                //     //     $result = mysqli_stmt_get_result($stmt)
+                //     //     $result = mysql_query($sql);
+
+
+                //     $param_blogid=$lastID;
+                //     $param_tag=$tag;
+                //     mysqli_stmt_bind_param($stmt, "ss", $param_blogid, $param_tag);
+  
+                // }
                 header("location: welcome.php");
             } else{
                 echo "Something went wrong. Please try again later.";
@@ -38,6 +71,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Close statement
             mysqli_stmt_close($stmt);
         }
+
     }
 }
 ?>
@@ -73,14 +107,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>    
 			<div class="form-group <?php echo (!empty($tag_err)) ? 'has-error' : ''; ?>">
                 <label>Tags</label>
-                <input type="text" name="Tag" class="form-control" value="<?php echo $tag; ?>">
+                <input type="text" name="tag" class="form-control" value="<?php echo $tag; ?>">
                 <span class="help-block"><?php echo $tag_err; ?></span>
             </div>  
-	<p>
-        <a href="Welcome.php" class="btn btn-danger">submit</a>
-    </p>
-	<p>
-        <a href="Welcome.php" class="btn btn-danger">cancel</a>
-    </p>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-default" value="Reset">
+            </div>
 </body>
 </html>
