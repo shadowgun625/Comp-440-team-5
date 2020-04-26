@@ -28,8 +28,12 @@ USE `project`;
 --
 -- Table structure for table `blogs`
 --
-
+DROP TABLE IF EXISTS `blogstags`;
+DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `follows`;
 DROP TABLE IF EXISTS `blogs`;
+DROP TABLE IF EXISTS `hobbies`;
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `blogs` (
   `blogid` int(11) NOT NULL,
   `subject` varchar(50) NOT NULL,
@@ -44,7 +48,7 @@ CREATE TABLE `blogs` (
 -- Table structure for table `blogstags`
 --
 
-DROP TABLE IF EXISTS `blogstags`;
+
 CREATE TABLE `blogstags` (
   `blogid` int(11) NOT NULL,
   `tag` int(11) NOT NULL
@@ -56,7 +60,7 @@ CREATE TABLE `blogstags` (
 -- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
+
 CREATE TABLE `comments` (
   `commentid` int(11) NOT NULL,
   `sentiment` varchar(20) NOT NULL,
@@ -72,7 +76,7 @@ CREATE TABLE `comments` (
 -- Table structure for table `follows`
 --
 
-DROP TABLE IF EXISTS `follows`;
+
 CREATE TABLE `follows` (
   `leader` varchar(20) NOT NULL,
   `follower` varchar(20) NOT NULL
@@ -84,7 +88,7 @@ CREATE TABLE `follows` (
 -- Table structure for table `hobbies`
 --
 
-DROP TABLE IF EXISTS `hobbies`;
+
 CREATE TABLE `hobbies` (
   `username` varchar(20) NOT NULL,
   `hobby` varchar(20) NOT NULL
@@ -96,7 +100,7 @@ CREATE TABLE `hobbies` (
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,

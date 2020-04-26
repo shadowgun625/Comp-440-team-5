@@ -1,14 +1,15 @@
 <?php
+
 // Name of the file
-$filename = 'university.sql';
+$filename = 'project.sql';
 // MySQL host
 $mysql_host = 'localhost';
 // MySQL username
 $mysql_username = 'root';
 // MySQL password
-$mysql_password = 'mysql';
+$mysql_password = '';
 // Database name
-$mysql_database = 'social project';
+$mysql_database = 'project';
 
 // Connect to MySQL server
 $con = @new mysqli($mysql_host,$mysql_username,$mysql_password,$mysql_database);
