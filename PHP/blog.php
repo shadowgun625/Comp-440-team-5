@@ -13,11 +13,36 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
  // Define variables and initialize with empty values
 $description = $tag = $subject = "";
 $description_err = $tag_err = $subject_err = "";
+$date = date('d-m-y h:i:s');
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(empty($description_err) && empty($tag_err) && empty($subject_err)){
+        // Prepare an insert statement
+        $sql = "INSERT INTO blogs (description, pdate, postuser, subject) VALUES (?, ?, ?, ?)";
+         
+        if($stmt = mysqli_prepare($link, $sql)){    
+            // Attempt to execute the prepared statement
+			mysqli_stmt_bind_param($stmt, "ssss", $param_description, $param_pdate, $param_postuser, $param_subject);
+			$param_description = $description;
+			$param_pdate = $pdate;
+			$param_postuser = $postuser;
+			$param_subject = $subject;
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("location: welcome.php");
+            } else{
+                echo "Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
