@@ -40,30 +40,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$param_pdate = $pdate;
 			$param_postuser = $_SESSION["username"];
             $param_subject = $subject;
-            $param_tag=$tag;
             mysqli_stmt_bind_param($stmt, "ssss", $param_description, $param_pdate, $param_postuser, $param_subject);
 
             if(mysqli_stmt_execute($stmt)){
-                // Redirect to login page
-                // $sql = "SELECT blogid FROM blogs WHERE username = '" . $_SESSION['username'] . "'";
-                // $result = mysql_query($sql);
-                // $result = mysqli_stmt_get_result($stmt);
-                // $lastID = mysql_insert_id($result);
-                // $sql = "INSERT INTO blogstags (blogid, tag) VALUES (?, ?)";
-                // if($stmt = mysqli_prepare($link, $sql)){
-                //     // $sql = "SELECT blogid FROM blogs WHERE username IS ?";
-                //     // mysqli_stmt_bind_param($stmt, "s", $postuser);
-                //     // if(mysqli_stmt_execute($stmt)){
-                //     //     $result = mysqli_stmt_get_result($stmt)
-                //     //     $result = mysql_query($sql);
-
-
-                //     $param_blogid=$lastID;
-                //     $param_tag=$tag;
-                //     mysqli_stmt_bind_param($stmt, "ss", $param_blogid, $param_tag);
-  
-                // }
-                header("location: welcome.php");
+                $sql = "INSERT INTO blogstags (blogid, tag) VALUES (?, ?)";
+                if($stmt2 = mysqli_prepare($link, $sql)){
+                    $param_tag=$tag;
+                    $blogid=mysqli_insert_id($link);
+                    mysqli_stmt_bind_param($stmt2, "ss",$blogid,$param_tag);
+                    mysqli_stmt_execute($stmt2);
+                }
             } else{
                 echo "Something went wrong. Please try again later.";
             }
