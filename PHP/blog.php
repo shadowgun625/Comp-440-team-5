@@ -11,8 +11,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 } 
  // Define variables and initialize with empty values
-$description = $tag = $subject = "";
-$description_err = $tag_err = $subject_err = "";
+$description = $tag = $subject = $pdate = "";
+$description_err = $tag_err = $subject_err = $pdate_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -31,14 +31,31 @@ if(empty(trim($_POST["tag"]))){
 } else{
 	$tag = trim($_POST["tag"]);
 }
-if(empty($subject_err) && empty($description_err)){
+$sql = "SELECT * FROM blogs WHERE pdate >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') AND postuser = ?";
+if($stmt = mysqli_prepare($link,$sql)){
+	mysqli_stmt_bind_param($stmt, "s", $param_postuser);
+	$param_postuser = $_SESSION["username"];
+	if(mysqli_stmt_execute($stmt)){
+		mysqli_stmt_store_result($stmt);
+		if(mysqli_stmt_num_rows($stmt) > 1){
+			$pdate_err = "You have reached the daily limit of 2 blogs per day";
+		} else{
+			$pdate = date('Y-m-d');
+		}
+	}else{
+		echo "Oops! Something went wrong.Please try again later.";
+	}
+	mysqli_stmt_close($stmt);
+}
+$pdate = date('Y-m-d');
+if(empty($subject_err) && empty($description_err)&& empty($pdate_err)){
 	$sql = "INSERT INTO blogs (subject, description, postuser, pdate) VALUES (?, ?, ?, ?)";
 	if($stmt = mysqli_prepare($link, $sql)){
 		mysqli_stmt_bind_param($stmt, "ssss", $param_subject, $param_description, $param_postuser, $param_pdate);
 		$param_subject = $subject;
 		$param_description = $description;
 		$param_postuser = $_SESSION["username"];
-		$param_pdate = date('d-m-y');
+		$param_pdate = date('Y-m-d');
 		if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
                mysqli_stmt_close($stmt);
@@ -102,8 +119,11 @@ if(empty($subject_err) && empty($description_err)){
                 <input type="text" name="tag" class="form-control" value="<?php echo $tag; ?>">
                 <span class="help-block"><?php echo $tag_err; ?></span>
             </div>
+			<div class="form-group <?php echo (!empty($pdate_err)) ? 'has-error' : ''; ?>">
+                <input type="submit" class="btn btn-primary" value="Insert a Blog" />
+                <span class="help-block"><?php echo $pdate_err; ?></span>
+            </div>
 			<div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Insert a Blog" />
 			<input type="reset" class="btn btn-default"  value="Reset">
 			</div>
 			<a href="welcome.php" class="btn btn-danger">cancel</a>
