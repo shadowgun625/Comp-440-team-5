@@ -3,8 +3,8 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = $user_type = $email = "";
-$username_err = $password_err = $confirm_password_err = $email_err = "";
+$username = $password = $confirm_password = $firstname = $lastname = $email = "";
+$username_err = $password_err = $confirm_password_err = $firstname_err = $lastname_err = $email_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username_err = "Please enter a username.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT user_id FROM user WHERE username = ?";
+        $sql = "SELECT username FROM users WHERE username = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -62,15 +62,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Password did not match.";
         }
     }
-	
-	$user_type = trim($_POST["user_type"]);
-	
+	if(empty(trim($_POST["firstname"]))){
+        $firstname_err = "Please enter a firstname.";
+    } else{ 
+		$firstname = trim($_POST["firstname"]);
+	}
+	if(empty(trim($_POST["lastname"]))){
+        $lastname_err = "Please enter a lastname.";
+    } else{ 
+		$lastname = trim($_POST["lastname"]);
+	}
     //validate email
 	if(empty(trim($_POST["email"]))){
         $email_err = "Please enter a email.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT user_id FROM user WHERE email = ?";
+        $sql = "SELECT email FROM users WHERE email = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -99,17 +106,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 	
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($firstname_err) && empty($lastname_err) && empty($email_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO user (username, password, user_type, email) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){    
             // Attempt to execute the prepared statement
-			mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_user_type, $param_email);
+			mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_firstname, $param_lastname, $param_email);
 			$param_username = $username;
 			$param_password = $password;
-			$param_user_type = $user_type;
+			$param_firstname = $firstname;
+			$param_lastname = $lastname;
 			$param_email = $email;
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
@@ -146,30 +154,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                <input type="text" name="username" class="form-control" maxlength="20" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+                <input type="password" name="password" class="form-control" maxlength="20" value="<?php echo $password; ?>">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
                 <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
+                <input type="password" name="confirm_password" class="form-control" maxlength="20" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
+            </div>
+			<div class="form-group <?php echo (!empty($firstname_err)) ? 'has-error' : ''; ?>">
+                <label>firstname</label>
+                <input type="text" name="firstname" class="form-control" maxlength="30" value="<?php echo $firstname; ?>">
+                <span class="help-block"><?php echo $firstname_err; ?></span>
+            </div>
+			<div class="form-group <?php echo (!empty($lastname_err)) ? 'has-error' : ''; ?>">
+                <label>lastname</label>
+                <input type="text" name="lastname" class="form-control" maxlength="30" value="<?php echo $lastname; ?>">
+                <span class="help-block"><?php echo $lastname_err; ?></span>
             </div>
 			<div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
-                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                <input type="text" name="email" class="form-control" maxlength="30" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
-            </div>
-			<div class="form-group">
-                <label>User type</label>
-                <select name="user_type">
-				<option value="staff">staff</option>
-				<option value="admin">admin</option>
-				</select>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
