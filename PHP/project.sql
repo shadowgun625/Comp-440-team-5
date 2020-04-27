@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2020 at 12:07 AM
+-- Generation Time: Apr 27, 2020 at 11:02 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -42,6 +42,16 @@ CREATE TABLE `blogs` (
   `pdate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`blogid`, `subject`, `description`, `postuser`, `pdate`) VALUES
+(71, 'The Thing', 'A human being made of rock like material. the affliction has no cure.', 'reed', '2020-04-27'),
+(72, 'rubberbands', 'rubber bands are similar to my powers of stretching and elasticity', 'reed', '2020-04-27'),
+(73, 'Testing dummy', 'i am a testing dummy who\'s only purpose is to see if i can fill the fields and see if the information goes to the right location in an appropriate time limit.', 'john', '2020-04-27'),
+(74, 'buttercream cake', 'I like buttercream cake i think i do not know all i know is i am to write the generic placeholder template to try and fill the database as quickly as possible', 'john', '2020-04-27');
+
 -- --------------------------------------------------------
 
 --
@@ -51,8 +61,27 @@ CREATE TABLE `blogs` (
 
 CREATE TABLE `blogstags` (
   `blogid` int(11) NOT NULL,
-  `tag` int(11) NOT NULL
+  `tag` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `blogstags`
+--
+
+INSERT INTO `blogstags` (`blogid`, `tag`) VALUES
+(71, 'cure'),
+(71, 'geology'),
+(71, 'rocks'),
+(71, 'Thing'),
+(72, 'elastic'),
+(72, 'mr.fantasic'),
+(72, 'rubbery'),
+(73, 'dummy'),
+(73, 'life'),
+(73, 'testing'),
+(74, 'cake'),
+(74, 'dummy'),
+(74, 'testing');
 
 -- --------------------------------------------------------
 
@@ -114,7 +143,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `firstname`, `lastname`, `email`) VALUES
-('john', 'pass1234', 'john', 'doe', 'johndoe@gmail.com');
+('john', 'pass1234', 'john', 'doe', 'johndoe@gmail.com'),
+('reed', 'reed1234', 'reed', 'richards', 'fantastic@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -169,7 +199,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `blogid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `blogid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -212,6 +242,7 @@ ALTER TABLE `follows`
 --
 ALTER TABLE `hobbies`
   ADD CONSTRAINT `hobbies_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

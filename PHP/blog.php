@@ -11,7 +11,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 } 
  // Define variables and initialize with empty values
-$description = $tag = $subject = $pdate = "";
+$description = $tag = $subject = $pdate = $tagarray[]=$count = "";
 $description_err = $tag_err = $subject_err = $pdate_err = "";
 
 // Processing form data when form is submitted
@@ -60,18 +60,26 @@ if(empty($subject_err) && empty($description_err)&& empty($pdate_err)){
                 // Redirect to login page
                mysqli_stmt_close($stmt);
 			   if(empty($tag_err)){
-				   $sql = "INSERT INTO blogstags (blogid, tag) VALUES (LAST_INSERT_ID(), ?)";
-				   if($stmt = mysqli_prepare($link, $sql)){
+				   $tagarray = explode(",",$tag);
+				   $tagcount = count($tagarray);
+				   for ($count = 0 ; $count < $tagcount; ++$count){
+					if(!empty($tagarray[$count])){
+					$sql = "INSERT INTO blogstags (blogid, tag) VALUES (LAST_INSERT_ID(), ?)";
+					if($stmt = mysqli_prepare($link, $sql)){
 					   mysqli_stmt_bind_param($stmt, "s",$param_tag);
-					   $param_tag = $tag;
+					   $param_tag = $tagarray[$count];
 					   if(mysqli_stmt_execute($stmt)){
-						   header("location: login.php");
 						   mysqli_stmt_close($stmt);
 					   } else{
 						   echo "Something went wrong. Please try again later.";
 					   }
+					
 				   }
+					}
+				  }
+				  header("location: login.php");
 			   }
+			   
         } else{
 			echo "Something went wrong. Please try again later.";
 			 mysqli_stmt_close($stmt);
@@ -87,12 +95,10 @@ if(empty($subject_err) && empty($description_err)&& empty($pdate_err)){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center;}
-		.wrapper{ width: 350px; padding: 20px; }
+        body{ font: 15px sans-serif; text-align: center;}
+		.wrapper{ width: 500px; margin: auto;}
     </style>
 
 </head>
@@ -106,27 +112,27 @@ if(empty($subject_err) && empty($description_err)&& empty($pdate_err)){
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			<div class="form-group <?php echo (!empty($subject_err)) ? 'has-error' : ''; ?>">
                 <label>Subject</label>
-                <input type="text" name="subject" class="form-control" value="<?php echo $subject; ?>">
+                <input type="text" name="subject" class="form-control" maxlength="50" value="<?php echo $subject; ?>"
+				placeholder = "ex.Buttercream cake">
                 <span class="help-block"><?php echo $subject_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($description_err)) ? 'has-error' : ''; ?>">
                 <label>Description</label>
-                <input type="text" name="description" class="form-control" value="<?php echo $description; ?>">
+                <textarea type="text" rows="10" maxlength="250" name="description" class="form-control" value="<?php echo $description; ?>"
+				placeholder = "ex.Buttercream cakes are way better than those fondant coverd cakes"></textarea>
                 <span class="help-block"><?php echo $description_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($tag_err)) ? 'has-error' : ''; ?>">
-                <label>Tag</label>
-                <input type="text" name="tag" class="form-control" value="<?php echo $tag; ?>">
+                <label>Tags</label>
+                <input type="text" name="tag" class="form-control" maxlength="20" value="<?php echo $tag; ?>" 
+				placeholder = "ex.cake,delicous,hungry or tasty">
                 <span class="help-block"><?php echo $tag_err; ?></span>
-            </div>
-			<div class="form-group <?php echo (!empty($pdate_err)) ? 'has-error' : ''; ?>">
-                <input type="submit" class="btn btn-primary" value="Insert a Blog" />
-                <span class="help-block"><?php echo $pdate_err; ?></span>
-            </div>
 			<div class="form-group">
+			<input type="submit" class="btn btn-primary" value="Insert a Blog" />
 			<input type="reset" class="btn btn-default"  value="Reset">
-			</div>
 			<a href="welcome.php" class="btn btn-danger">cancel</a>
+			</div>
+			<span class="help-block"><?php echo $pdate_err; ?></span>
         </form>
 </div>
 
