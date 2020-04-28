@@ -1,7 +1,6 @@
 <?php
 // Initialize the session
 session_start();
- 
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
@@ -31,6 +30,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </p>
 	<p>
         <a href="blog.php" class="btn btn-danger">Insert Blog</a>
+    </p>
+	<p>
+        <a href="search.php" class="btn btn-danger">Start Search</a>
     </p>
 </body>
 </html>
