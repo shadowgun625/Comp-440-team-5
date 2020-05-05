@@ -31,8 +31,17 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 	<p>
         <a href="blog.php" class="btn btn-danger">Insert Blog</a>
     </p>
-	<p>
-        <a href="search.php" class="btn btn-danger">Start Search</a>
-    </p>
+
+    <hr>
+    <h1>Queries</h1>
+
+    <div class="page-body">
+        <p>
+            <a href="part3_3.php" class="btn btn-danger">All users with posistve comments only</a>
+        </p>
+        <p>
+            <a href="part3_6.php" class="btn btn-danger">All users that never posted a blog</a>
+        </p>
+    </div>
 </body>
 </html>
