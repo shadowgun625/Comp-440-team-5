@@ -31,6 +31,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 	<p>
         <a href="blog.php" class="btn btn-danger">Insert Blog</a>
     </p>
+    <p>
+        <a href="search.php" class="btn btn-danger">Start Search</a>
+    </p>
 
     <hr>
     <h1>Queries</h1>

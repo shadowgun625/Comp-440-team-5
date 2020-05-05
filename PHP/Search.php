@@ -16,7 +16,6 @@ $_SESSION['id']="";
         body{ font: 14px sans-serif; text-align: center;}
 		.wrapper{ width: 350px; margin: auto; }
     </style>
-
 </head>
 <body>
 
@@ -31,7 +30,8 @@ $_SESSION['id']="";
 				<span class="help-block"><?php echo $not_found; ?></span>
             </div>
 			<div class="form-group">
-			<input type="submit" class="btn btn-primary" value="Search Tag" />
+			<input type="submit" class="btn btn-primary" value="Search" />
+			<a href="welcome.php" class="btn btn-danger">cancel</a>
 			</div>
 		</form>
 	</div>
@@ -65,7 +65,6 @@ $_SESSION['id']="";
 									mysqli_stmt_bind_result($secondstmt, $subject,$description,$postuser,$pdate);
 									while(mysqli_stmt_fetch($secondstmt)){
 										echo"
-										<form align = 'left'>
 											<dl>
 											<dt>Poster</dt>
 											<dd>$postuser</dd>
@@ -77,10 +76,10 @@ $_SESSION['id']="";
 											<dd>$description</dd>
 											<dt>posted</dt>
 											<dd>$pdate</dd>
-											</dl>
-											<input type='submit' class='btn btn-primary' value='details'>
-											</form>";
+											</dl>";
+											echo '<a href="comment.php?id=' . $blogid . '"> Details</a>';
 											
+										
 									}
 								}
 							mysqli_stmt_close($secondstmt);
@@ -100,7 +99,7 @@ $_SESSION['id']="";
 		}
 	}
 }
-	?>
-    </div>
+?>
+</div>
 </body>
 </html>
