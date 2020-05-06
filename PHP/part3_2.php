@@ -12,7 +12,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 } 
 
 //$sql = "SELECT DISTINCT postuser FROM blogs, blogstags WHERE (blogs.postuser = blogs.postuser AND blogstags.tag = 'Y') AND (blogs.postuser = blogs.postuser AND blogstags.tag = 'X')" ;
-$sql = "SELECT DISTINCT postuser FROM blogs, blogstags WHERE (blogstags.tag = 'Y') AND (blogstags.tag = 'X')";
+$sql = "SELECT DISTINCT postuser FROM blogs, blogstags WHERE postuser IN (SELECT postuser FROM blogs, blogstags WHERE (blogs.blogid=blogstags.blogid AND blogstags.tag = 'Y')) AND (blogs.blogid=blogstags.blogid AND blogstags.tag = 'X')";
 
 if ($stmt = $link->prepare($sql)) {
     $stmt->execute();
