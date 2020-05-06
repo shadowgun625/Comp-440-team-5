@@ -39,6 +39,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <h1>Queries</h1>
 
     <div class="page-body">
+    <p>
+            <a href="part3_2.php" class="btn btn-danger">List the users who post at least two blogs, one has a tag of “X,” and another has a tag of “Y”.</a>
+        </p>
         <p>
             <a href="part3_3.php" class="btn btn-danger">All users with posistve comments only</a>
         </p>
