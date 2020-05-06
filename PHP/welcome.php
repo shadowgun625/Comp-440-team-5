@@ -46,6 +46,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <a href="part3_3.php" class="btn btn-danger">All users with posistve comments only</a>
         </p>
         <p>
+            <a href="part3_5.php" class="btn btn-danger">List the users who are followed by both X and Y. Usernames X and Y are inputs from the user.</a>
+        </p>
+        <p>
             <a href="part3_6.php" class="btn btn-danger">All users that never posted a blog</a>
         </p>
     </div>
