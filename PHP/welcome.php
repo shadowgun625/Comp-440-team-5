@@ -39,7 +39,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <h1>Queries</h1>
 
     <div class="page-body">
-    <p>
+		<p>
             <a href="part3_2.php" class="btn btn-danger">List the users who post at least two blogs, one has a tag of “X,” and another has a tag of “Y”.</a>
         </p>
         <p>
@@ -47,6 +47,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         </p>
         <p>
             <a href="part3_6.php" class="btn btn-danger">All users that never posted a blog</a>
+        </p>
+		<p>
+            <a href="part3_8.php" class="btn btn-danger">All users that only post negative comments</a>
+        </p>
+		<p>
+            <a href="part3_9.php" class="btn btn-danger">users who have no negative comments</a>
+        </p>
+		<p>
+            <a href="part3_10.php" class="btn btn-danger">user pairs that gave each other only positive comments</a>
         </p>
     </div>
 </body>
