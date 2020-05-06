@@ -43,13 +43,19 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <a href="part3_2.php" class="btn btn-danger">List the users who post at least two blogs, one has a tag of “X,” and another has a tag of “Y”.</a>
         </p>
         <p>
-            <a href="part3_3.php" class="btn btn-danger">All users with posistve comments only</a>
+            <a href="part3_3.php" class="btn btn-danger">All blogs of a user with positve comments only</a>
         </p>
-        <p>
-            <a href="part3_5.php" class="btn btn-danger">List the users who are followed by both X and Y. Usernames X and Y are inputs from the user.</a>
+		<p>
+            <a href="part3_4.php" class="btn btn-danger">Max post on date choosen.</a>
+        </p>
+		<p>
+            <a href="part3_5.php" class="btn btn-danger">Find the leaders</a>
         </p>
         <p>
             <a href="part3_6.php" class="btn btn-danger">All users that never posted a blog</a>
+        </p>
+		<p>
+            <a href="part3_7.php" class="btn btn-danger">All users that never posted a comment</a>
         </p>
 		<p>
             <a href="part3_8.php" class="btn btn-danger">All users that only post negative comments</a>

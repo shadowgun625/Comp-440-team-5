@@ -3,18 +3,11 @@
 session_start();
 require_once "config.php";
 
-$sql ="SELECT username FROM users WHERE username NOT IN (SELECT author FROM comments)";
-
-//Group By blogid HAVING SUM(comment.sentiment = 'negative') = 0 ;
-if($stmt = $link -> prepare ($sql)){
-    $stmt -> execute();
-    $stmt -> bind_result($username);
-    while($stmt -> fetch())
-    {
-        echo "<br>" ;
-        printf("Username: %s\n", $username);
-    }  
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
 }
+
 ?>
 
 
@@ -30,11 +23,24 @@ if($stmt = $link -> prepare ($sql)){
 
 </head>
 <body>
-
-
     <div class="wrapper">
-        <h1>All the users that never made a comment</h1>
-  <div class="wrapper">
+        <h1>All the users that never posted a comment</h1>
+		<div class="wrapper">
+		<?php
+		$sql ="SELECT username FROM users WHERE username NOT IN (SELECT author FROM comments)";
+
+		//Group By blogid HAVING SUM(comment.sentiment = 'negative') = 0 ;
+		if($stmt = $link -> prepare ($sql)){
+			$stmt -> execute();
+			$stmt -> bind_result($username);
+			while($stmt -> fetch())
+			{
+				echo '<div class="wrapper">' ;
+				echo "<h3>USER: $username</h3>";
+				echo '</div>';
+			}  
+		}
+		?>
        
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			<a href="welcome.php" class="btn btn-danger">Go Back</a>

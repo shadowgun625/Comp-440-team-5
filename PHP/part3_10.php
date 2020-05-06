@@ -50,7 +50,7 @@ $last_pair = "";
 													$param_author2 = $username;
 													if(mysqli_stmt_execute($stmt4)){
 														mysqli_stmt_store_result($stmt4);
-														if(mysqli_stmt_num_rowS($stmt4)<1){
+														if(mysqli_stmt_num_rows($stmt4)<1){
 															echo '<div class-"wrapper">';
 															echo "<h3> Pair($username, $author) </h3";
 															echo '</div>';
