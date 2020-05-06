@@ -127,6 +127,7 @@ if(empty($subject_err) && empty($description_err)&& empty($pdate_err)){
                 <input type="text" name="tag" class="form-control" maxlength="20" value="<?php echo $tag; ?>" 
 				placeholder = "ex.cake,delicous,hungry or tasty">
                 <span class="help-block"><?php echo $tag_err; ?></span>
+			</div>
 			<div class="form-group">
 			<input type="submit" class="btn btn-primary" value="Insert a Blog" />
 			<input type="reset" class="btn btn-default"  value="Reset">

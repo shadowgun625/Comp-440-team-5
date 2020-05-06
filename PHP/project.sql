@@ -3,13 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2020 at 11:02 AM
+-- Generation Time: May 05, 2020 at 10:10 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -50,14 +46,15 @@ INSERT INTO `blogs` (`blogid`, `subject`, `description`, `postuser`, `pdate`) VA
 (71, 'The Thing', 'A human being made of rock like material. the affliction has no cure.', 'reed', '2020-04-27'),
 (72, 'rubberbands', 'rubber bands are similar to my powers of stretching and elasticity', 'reed', '2020-04-27'),
 (73, 'Testing dummy', 'i am a testing dummy who\'s only purpose is to see if i can fill the fields and see if the information goes to the right location in an appropriate time limit.', 'john', '2020-04-27'),
-(74, 'buttercream cake', 'I like buttercream cake i think i do not know all i know is i am to write the generic placeholder template to try and fill the database as quickly as possible', 'john', '2020-04-27');
+(74, 'buttercream cake', 'I like buttercream cake i think i do not know all i know is i am to write the generic placeholder template to try and fill the database as quickly as possible', 'john', '2020-04-27'),
+(75, 'Cant wait for cake boss season 15', 'cant wait for what buddy is going to make in cake boss season 15 hope its make out of fondunt', 'john', '2020-05-05'),
+(76, 'What is a bird', 'No seriously what is a bird i get mixed signals form the internet', 'john', '2020-05-05');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `blogstags`
 --
-
 
 CREATE TABLE `blogstags` (
   `blogid` int(11) NOT NULL,
@@ -81,14 +78,18 @@ INSERT INTO `blogstags` (`blogid`, `tag`) VALUES
 (73, 'testing'),
 (74, 'cake'),
 (74, 'dummy'),
-(74, 'testing');
+(74, 'testing'),
+(75, 'cake'),
+(75, 'cake boss'),
+(76, ' internet'),
+(76, ' what'),
+(76, 'bird');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `comments`
 --
-
 
 CREATE TABLE `comments` (
   `commentid` int(11) NOT NULL,
@@ -99,12 +100,22 @@ CREATE TABLE `comments` (
   `author` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`commentid`, `sentiment`, `description`, `cdate`, `blogid`, `author`) VALUES
+(1, 'negative', 'Why would you even post this it makes no sense', '2020-05-05', 72, 'john'),
+(2, 'positive', 'I like the rock man', '2020-05-05', 71, 'john'),
+(3, 'negative', 'Then how do you know your a testing dummy or a human who is testing you.', '2020-05-05', 73, 'reed'),
+(4, 'negative', 'I\'\'m a fondunt person myself to be honest', '2020-05-05', 74, 'reed'),
+(5, 'negative', 'cake boss is bad', '2020-05-05', 75, 'reed');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `follows`
 --
-
 
 CREATE TABLE `follows` (
   `leader` varchar(20) NOT NULL,
@@ -117,7 +128,6 @@ CREATE TABLE `follows` (
 -- Table structure for table `hobbies`
 --
 
-
 CREATE TABLE `hobbies` (
   `username` varchar(20) NOT NULL,
   `hobby` varchar(20) NOT NULL
@@ -128,8 +138,6 @@ CREATE TABLE `hobbies` (
 --
 -- Table structure for table `users`
 --
-
-
 CREATE TABLE `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -199,13 +207,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `blogid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `blogid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `commentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -242,7 +250,6 @@ ALTER TABLE `follows`
 --
 ALTER TABLE `hobbies`
   ADD CONSTRAINT `hobbies_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
